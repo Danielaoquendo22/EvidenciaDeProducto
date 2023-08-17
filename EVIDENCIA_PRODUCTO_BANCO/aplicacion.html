@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> BANCO STELLAR</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="d-flex flex-column">
+  <header class="navbar navbar-dark bg-dark">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span class="navbar-brand mb-0 h1"> BANCO STELLAR</span>
+      <div class="d-flex align-items-center">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="darkModeSwitch">
+        </div>
+        <button id="logoutBtn" class="btn btn-outline-light">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="sidebar">
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action" data-target="perfil">Consulta Perfil y Saldo</a>
+      <a href="#" class="list-group-item list-group-item-action" data-target="consignar">Consignar</a>
+      <a href="#" class="list-group-item list-group-item-action" data-target="retirar">Retirar</a>
+      <a href="#" class="list-group-item list-group-item-action" data-target="transferir">Transferir</a>
+      <a href="#" class="list-group-item list-group-item-action" data-target="movimientos">Movimientos</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="main-content">
+      <div id="perfil" class="content" style="display: none;">
+
+        <h1>Perfil del usuario</h1>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="profile-image">
+                <img id="avatar" src="" alt="Avatar del usuario">
+              </div>
+              <div class="profile-name">
+                <h4 id="name"></h4>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <form id="profile-form">
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" class="form-control" disabled required>
+                </div>
+                <div class="form-group">
+                  <label for="firstName">Nombre:</label>
+                  <input type="text" id="firstName" class="form-control" disabled required>
+                </div>
+                <div class="form-group">
+                  <label for="secondName">Segundo nombre:</label>
+                  <input type="text" id="secondName" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Apellido:</label>
+                  <input type="text" id="lastName" class="form-control" disabled required>
+                </div>
+                <div class="form-group">
+                  <label for="secondLastName">Segundo apellido:</label>
+                  <input type="text" id="secondLastName" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="cuenta">Numero de cuenta:</label>
+                  <input type="number" id="cuenta" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="saldo">saldo:</label>
+                  <input type="number" id="saldo" class="form-control" disabled>
+                </div>
+
+
+                <button id="editBtn" class="btn btn-primary">Editar</button>
+                <button type="submit" id="saveBtn" class="btn btn-success d-none">Guardar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div id="consignar" class="content" style="display: none;">
+        <form id="consignacion" novalidate>
+          
+          <div class="form-group">
+            <label for="valorC">Valor a consignar:</label>
+            <input type="number" class="form-control" id="valorC" required>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Consignar</button>
+        </form>
+
+        <div class="modal fade" id="infoCompraModal" tabindex="-1" role="dialog" aria-labelledby="infoCompraModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="infoCompraModalLabel">Detalles de la consignación</h5>
+                <span class="navbar-brand mb-0 h1"> BANCO STELLAR</span>
+              </div>
+              <div class="modal-body" id="modalBody">
+                <!-- Aquí se llenarán los datos dinámicamente -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="retirar" class="content" style="display: none;">
+        <form id="ret" novalidate>
+        <div class="form-group">
+          <label for="valorR">Valor a retirar:</label>
+          <input type="number" class="form-control" id="valorR" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Retirar</button>
+        </form>
+
+        <div class="modal fade" id="infoRetiroModal" tabindex="-1" role="dialog" aria-labelledby="infoCompraModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="infoCompraModalLabel">Detalles de la consignación</h5>
+              <span class="navbar-brand mb-0 h1"> BANCO STELLAR</span>
+            </div>
+            <div class="modal-body" id="modalBodyRetiro">
+              <!-- Aquí se llenarán los datos dinámicamente -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      </div>
+
+
+
+
+      <div id="movimientos" class="content" style="display: none;">
+        
+      </div>
+
+      <div id="transferir" class="content" style="display: none;">
+
+        <form id="transf" novalidate>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Tipo de Cuenta</option>
+            <option value="1">Ahorros </option>
+            <option value="2">Corriente</option>
+            <option value="3">Nequi</option>
+          </select>
+          <div class="form-group">
+            <label for="numCuenta">Numero de cuenta:</label>
+            <input type="number" class="form-control" id="numCuenta" required>
+          </div>
+          <div class="form-group">
+            <label for="valorT">Valor a transferir:</label>
+            <input type="number" class="form-control" id="valorT" required>
+          </div>
+          <button class="btn btn-primary" type="submit">Transferir</button>
+          </form>
+  
+          <div class="modal fade" id="infoTransferirModal" tabindex="-1" role="dialog" aria-labelledby="infoCompraModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="infoCompraModalLabel">Detalles de la Transferencia</h5>
+                <span class="navbar-brand mb-0 h1"> BANCO STELLAR</span>
+              </div>
+              <div class="modal-body" id="modalBodyTransferencia">
+                <!-- Aquí se llenarán los datos dinámicamente -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+
+
+      
+      </div>
+      
+      
+      
+      
+      
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="js/validaToken.js"></script>
+  <script src="js/opciones.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
